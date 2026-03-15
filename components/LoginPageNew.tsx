@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
-// ── Swap these to your actual public paths ──
 const AVATAR_ASHU = '/login-a.jpg';
 const AVATAR_CHIKU = '/login-c.jpg';
-// ── Place couple.avif in /public/couple.avif ──
 
 export default function LoginPageNew() {
   const [username, setUsername] = useState('');
@@ -143,30 +141,43 @@ export default function LoginPageNew() {
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Theme toggle */
         .theme-btn {
-          position: absolute;
-          top: -52px;
-          right: 0;
-          width: 40px; height: 40px;
-          border-radius: 50%;
-          border: 1.5px solid ${isDark ? 'rgba(180,140,220,0.4)' : 'rgba(200,170,230,0.7)'};
-          background: ${isDark ? 'rgba(50,30,80,0.7)' : 'rgba(255,255,255,0.8)'};
-          cursor: pointer;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 16px;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          backdrop-filter: blur(8px);
-        }
-        .theme-btn:hover {
-          transform: rotate(20deg) scale(1.1);
-          box-shadow: 0 4px 16px rgba(180,140,220,0.35);
-        }
+  position: absolute;
+  top: -46px;
+  right: 4px;
+  border: 1px solid ${isDark
+          ? 'rgba(180,140,220,0.18)'
+          : 'rgba(200,170,230,0.35)'};
+  width: 34px;
+  height: 34px;
 
-        /* Couple bg image */
+  border-radius: 50%;
+
+  backdrop-filter: blur(6px);
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  opacity: 0.75;
+
+  transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+}
+
+.theme-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  background: ${isDark
+          ? 'rgba(60,35,95,0.5)'
+          : 'rgba(255,255,255,0.65)'};
+}
+
         .couple-bg {
           position: absolute;
           inset: 0;
+          z-index: 2;
           pointer-events: none;
           overflow: hidden;
           border-radius: inherit;
@@ -181,7 +192,7 @@ export default function LoginPageNew() {
   object-fit: cover;
   object-position: top center;
 
-  opacity: ${isDark ? '0.09' : '0.5'};
+  opacity: ${isDark ? '0.09' : '0.2'};
   filter: ${isDark ? 'grayscale(25%) blur(0.4px)' : 'grayscale(15%) blur(0.3px)'};
 
   /* multi-direction fade */
@@ -371,6 +382,8 @@ export default function LoginPageNew() {
 
         /* Login button */
         .login-btn {
+        position: relative;
+        z-index: 1;
           width: 100%;
           padding: 0.85rem 1rem;
           border: none;
@@ -478,14 +491,14 @@ export default function LoginPageNew() {
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
             aria-label="Toggle theme"
           >
-            {isDark ? '☀️' : '🌙'}
+            {isDark ? '🌙' : '☀️'}
           </button>
 
           {/* Card */}
           <div className="card">
             {/* Low-opacity couple image inside card */}
             <div className="couple-bg">
-              <img src="/couple.avif" alt="" aria-hidden="true" />
+              <img src="/friends.avif" alt="" aria-hidden="true" />
             </div>
 
             {/* Real avatars */}
@@ -534,7 +547,7 @@ export default function LoginPageNew() {
                     onChange={(e) => setUsername(e.target.value)}
                     onFocus={() => setFocusedField('username')}
                     onBlur={() => setFocusedField(null)}
-                    placeholder="ashu or chiku"
+                    placeholder="Who are you? (Ashu or Chiku)"
                     disabled={loading}
                     className="field-input"
                     autoComplete="username"

@@ -23,6 +23,111 @@ interface Message {
 }
 
 // ─────────────────────────────────────────────
+// HeaderMenu — refresh standalone, kebab for theme+logout
+// ─────────────────────────────────────────────
+const HeaderMenu = ({
+    isDark, refreshing, onRefresh, onToggleTheme, onLogout,
+}: {
+    isDark: boolean; refreshing: boolean;
+    onRefresh: () => void; onToggleTheme: () => void; onLogout: () => void;
+}) => {
+    const [open, setOpen] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {/* Refresh — unchanged */}
+            <motion.button
+                className="icon-btn"
+                onClick={onRefresh}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Refresh"
+            >
+                <RefreshCw size={15} style={{ animation: refreshing ? 'spin 0.5s linear' : 'none' }} />
+            </motion.button>
+
+            {/* Kebab menu wrapping theme + logout */}
+            <div ref={ref} style={{ position: 'relative' }}>
+                <motion.button
+                    className="icon-btn"
+                    onClick={() => setOpen(o => !o)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label="More options"
+                    style={{ fontWeight: 900, fontSize: 18, letterSpacing: 1 }}
+                >
+                    ⋮
+                </motion.button>
+
+                <AnimatePresence>
+                    {open && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.88, y: -6 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.88, y: -6 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                            style={{
+                                position: 'absolute', top: 46, right: 0,
+                                background: isDark ? 'rgba(30,16,58,0.96)' : 'rgba(255,255,255,0.97)',
+                                backdropFilter: 'blur(20px)',
+                                border: `1.5px solid ${isDark ? 'rgba(170,130,230,0.28)' : 'rgba(200,170,230,0.5)'}`,
+                                borderRadius: 16,
+                                boxShadow: `0 8px 28px ${isDark ? 'rgba(0,0,0,0.45)' : 'rgba(160,130,210,0.2)'}`,
+                                overflow: 'hidden', minWidth: 148, zIndex: 50,
+                            }}
+                        >
+                            {/* Theme toggle */}
+                            <motion.button
+                                onClick={() => { onToggleTheme(); setOpen(false); }}
+                                whileHover={{ background: isDark ? 'rgba(155,93,229,0.18)' : 'rgba(200,170,240,0.18)' }}
+                                style={{
+                                    width: '100%', padding: '11px 16px',
+                                    display: 'flex', alignItems: 'center', gap: 10,
+                                    background: 'transparent', border: 'none', cursor: 'pointer',
+                                    color: isDark ? 'rgba(225,200,255,0.9)' : 'rgba(80,40,120,0.9)',
+                                    fontFamily: "'Nunito', sans-serif", fontSize: 13, fontWeight: 700,
+                                }}
+                            >
+                                <span style={{ fontSize: 16 }}>{isDark ? '☀️' : '🌙'}</span>
+                                {isDark ? 'Light mode' : 'Dark mode'}
+                            </motion.button>
+
+                            {/* Divider */}
+                            <div style={{ height: 1, background: isDark ? 'rgba(170,130,230,0.15)' : 'rgba(200,170,230,0.3)', margin: '0 10px' }} />
+
+                            {/* Logout */}
+                            <motion.button
+                                onClick={() => { onLogout(); setOpen(false); }}
+                                whileHover={{ background: isDark ? 'rgba(220,80,80,0.12)' : 'rgba(220,80,80,0.07)' }}
+                                style={{
+                                    width: '100%', padding: '11px 16px',
+                                    display: 'flex', alignItems: 'center', gap: 10,
+                                    background: 'transparent', border: 'none', cursor: 'pointer',
+                                    color: isDark ? 'rgba(255,140,140,0.85)' : 'rgba(180,50,50,0.85)',
+                                    fontFamily: "'Nunito', sans-serif", fontSize: 13, fontWeight: 700,
+                                }}
+                            >
+                                <LogOut size={14} />
+                                Logout
+                            </motion.button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </div>
+    );
+};
+
+// ─────────────────────────────────────────────
 // FloatingShapes — ambient background blobs
 // ─────────────────────────────────────────────
 const FloatingShapes = ({ isDark }: { isDark: boolean }) => (
@@ -420,17 +525,13 @@ export default function ChatPage() {
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <motion.button className="icon-btn" onClick={handleRefresh} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} aria-label="Refresh">
-                            <RefreshCw size={15} style={{ animation: refreshing ? 'spin 0.5s linear' : 'none' }} />
-                        </motion.button>
-                        <motion.button className="icon-btn" onClick={() => setTheme(isDark ? 'light' : 'dark')} whileHover={{ rotate: 20, scale: 1.1 }} whileTap={{ scale: 0.9 }} aria-label="Toggle theme" style={{ fontSize: 15, border: 'none' }}>
-                            {isDark ? '☀️' : '🌙'}
-                        </motion.button>
-                        <motion.button className="icon-btn" onClick={handleLogout} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} aria-label="Logout">
-                            <LogOut size={14} />
-                        </motion.button>
-                    </div>
+                    <HeaderMenu
+                        isDark={isDark}
+                        refreshing={refreshing}
+                        onRefresh={handleRefresh}
+                        onToggleTheme={() => setTheme(isDark ? 'light' : 'dark')}
+                        onLogout={handleLogout}
+                    />
                 </motion.header>
 
                 {/* ── MESSAGES ── */}

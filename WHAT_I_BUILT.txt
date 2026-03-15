@@ -376,7 +376,6 @@ ROMANTIC DESIGN:
   ✓ Serif fonts for elegance
   ✓ Personalized with both names
   ✓ Beautiful animations
-  ✓ Couple-style aesthetic
 
 PERFECT FOR YOUR USE CASE:
   ✓ Refresh-based (not real-time)
