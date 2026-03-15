@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     const { content, image } = await request.json();
 
-    if (!content) {
+    if (!content && !image) {
       return NextResponse.json(
         { error: 'Content is required' },
         { status: 400 }

@@ -8,10 +8,42 @@ __v0_jsx-dev-runtime.ts
 .vercel/
 next.user-config.*
 
-# Environment variables
-.env*.local
-
-# Common ignores
+# Node / Next.js
 node_modules/
 .next/
+next-env.d.ts
+dist/
+out/
+
+# Env & secrets
+.env
+.env*.local
+.env.production
+.env.development
+.env.test
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# OS / editor junk
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Coverage / test output
+coverage/
+.nyc_output/
+
+# Misc build artefacts
+.turbo/
+.eslintcache
+.parcel-cache
+.cache/
