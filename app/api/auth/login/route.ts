@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       console.log('[LOGIN] Current users in DB:', allUsers);
 
       return NextResponse.json(
-        { error: 'Invalid username or password' },
+        { error: 'Only Ashu & Chiku can enter here! ✨' },
         { status: 401 }
       );
     }
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     if (!isPasswordValid) {
       console.log('[LOGIN] Invalid password for username:', user.username);
       return NextResponse.json(
-        { error: 'Invalid username or password' },
+        { error: 'Only Ashu & Chiku can enter here! ✨' },
         { status: 401 }
       );
     }

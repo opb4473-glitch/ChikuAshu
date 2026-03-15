@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
+// ── Swap these to your actual public paths ──
+const AVATAR_ASHU = '/login-a.jpg';
+const AVATAR_CHIKU = '/login-c.jpg';
+// ── Place couple.avif in /public/couple.avif ──
+
 export default function LoginPageNew() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -158,22 +163,65 @@ export default function LoginPageNew() {
           box-shadow: 0 4px 16px rgba(180,140,220,0.35);
         }
 
-        /* Couple icon */
-        .couple-icon {
+        /* Couple bg image */
+        .couple-bg {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+          border-radius: inherit;
+          z-index: 0;
+        }
+          .couple-bg img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 65%;
+  height: 80%;
+  object-fit: cover;
+  object-position: top center;
+
+  opacity: ${isDark ? '0.09' : '0.5'};
+  filter: ${isDark ? 'grayscale(25%) blur(0.4px)' : 'grayscale(15%) blur(0.3px)'};
+
+  /* multi-direction fade */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, black 25%, black 100%),   /* strong top fade */
+    linear-gradient(to top, transparent 0%, black 15%, black 100%),      /* light bottom fade */
+    linear-gradient(to right, transparent 0%, black 20%, black 100%),    /* left fade */
+    linear-gradient(to left, transparent 0%, black 20%, black 100%);     /* right fade */
+
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+}
+        /* Avatar row */
+        .avatar-row {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 2px;
-          margin-bottom: 1rem;
+          gap: 14px;
+          margin-bottom: 1.1rem;
+          position: relative; z-index: 1;
           animation: iconBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
         }
-        .heart-icon {
-          font-size: 28px;
+        .avatar-img {
+          width: 64px; height: 64px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2.5px solid ${isDark ? 'rgba(200,160,255,0.5)' : 'rgba(200,170,240,0.8)'};
+          box-shadow: 0 4px 18px ${isDark ? 'rgba(155,93,229,0.35)' : 'rgba(180,140,240,0.28)'};
+          transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+          background: ${isDark ? 'rgba(55,30,90,0.7)' : 'rgba(240,230,255,0.9)'};
+        }
+        .avatar-img:hover { transform: scale(1.1) rotate(-4deg); }
+        .avatar-img.right:hover { transform: scale(1.1) rotate(4deg); }
+        .avatar-heart {
+          font-size: 22px;
           animation: heartbeat 2.4s ease-in-out infinite;
         }
         @keyframes heartbeat {
           0%, 100% { transform: scale(1); }
-          14% { transform: scale(1.2); }
+          14% { transform: scale(1.22); }
           28% { transform: scale(1); }
           42% { transform: scale(1.15); }
           56% { transform: scale(1); }
@@ -188,15 +236,19 @@ export default function LoginPageNew() {
           font-family: 'Pacifico', cursive;
           font-size: 1.75rem;
           text-align: center;
+          display: inline-block;
+          width: 100%;
           background: ${isDark
-          ? 'linear-gradient(135deg, #e8b4f8 0%, #c4a0f4 50%, #a0c4ff 100%)'
-          : 'linear-gradient(135deg, #c06ac0 0%, #9b6bda 50%, #6b9be8 100%)'};
+          ? 'linear-gradient(135deg, #f2ccff 0%, #d8b8ff 50%, #b8d8ff 100%)'
+          : 'linear-gradient(135deg, #9b30c0 0%, #7c3aed 50%, #4a6fd6 100%)'};
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          color: ${isDark ? '#d8b8ff' : '#7c3aed'};
           margin-bottom: 0.35rem;
           line-height: 1.2;
           animation: titleSlide 0.7s ease 0.1s both;
+          position: relative; z-index: 1;
         }
         @keyframes titleSlide {
           from { opacity: 0; transform: translateY(-10px); }
@@ -211,6 +263,7 @@ export default function LoginPageNew() {
           margin-bottom: 2rem;
           letter-spacing: 0.03em;
           animation: titleSlide 0.7s ease 0.2s both;
+          position: relative; z-index: 1;
         }
 
         /* Divider */
@@ -219,6 +272,7 @@ export default function LoginPageNew() {
           align-items: center;
           gap: 10px;
           margin-bottom: 1.5rem;
+          position: relative; z-index: 1;
         }
         .divider-line {
           flex: 1;
@@ -235,6 +289,7 @@ export default function LoginPageNew() {
         .form-group {
           margin-bottom: 1.1rem;
           animation: fieldSlide 0.6s ease both;
+          position: relative; z-index: 1;
         }
         .form-group:nth-child(1) { animation-delay: 0.3s; }
         .form-group:nth-child(2) { animation-delay: 0.4s; }
@@ -302,6 +357,9 @@ export default function LoginPageNew() {
           font-size: 0.85rem;
           font-weight: 600;
           animation: shake 0.4s ease;
+          position: relative; z-index: 1;
+          display: flex;
+          justify-content: center;
         }
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
@@ -425,11 +483,26 @@ export default function LoginPageNew() {
 
           {/* Card */}
           <div className="card">
-            {/* Couple icon */}
-            <div className="couple-icon">
-              <span style={{ fontSize: '26px' }}>🌸</span>
-              <span className="heart-icon">💕</span>
-              <span style={{ fontSize: '26px' }}>🌸</span>
+            {/* Low-opacity couple image inside card */}
+            <div className="couple-bg">
+              <img src="/couple.avif" alt="" aria-hidden="true" />
+            </div>
+
+            {/* Real avatars */}
+            <div className="avatar-row">
+              <img
+                src={AVATAR_ASHU}
+                alt="Ashu"
+                className="avatar-img"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              {/* <span className="avatar-heart">💕</span> */}
+              <img
+                src={AVATAR_CHIKU}
+                alt="Chiku"
+                className="avatar-img right"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
             </div>
 
             {/* Title */}
@@ -444,18 +517,7 @@ export default function LoginPageNew() {
               <div className="divider-line" />
             </div>
 
-            {/* Error */}
-            {error && (
-              <div className="error-box">
-                {error.includes('MONGODB_URI') ? (
-                  <div>
-                    <p style={{ marginBottom: '6px' }}>⚙️ Setup needed — add MONGODB_URI in Vercel Vars, then refresh!</p>
-                  </div>
-                ) : (
-                  <p>❌ {error}</p>
-                )}
-              </div>
-            )}
+
 
             {/* Form */}
             <form onSubmit={handleLogin} noValidate>
@@ -500,7 +562,18 @@ export default function LoginPageNew() {
                   />
                 </div>
               </div>
-
+              {/* Error */}
+              {error && (
+                <div className="error-box">
+                  {error.includes('MONGODB_URI') ? (
+                    <div>
+                      <p style={{ marginBottom: '6px' }}>⚙️ Setup needed — add MONGODB_URI in Vercel Vars, then refresh!</p>
+                    </div>
+                  ) : (
+                    <p> {error}</p>
+                  )}
+                </div>
+              )}
               <button
                 type="submit"
                 disabled={loading || !username || !password}
