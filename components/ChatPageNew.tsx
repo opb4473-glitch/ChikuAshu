@@ -821,6 +821,11 @@ const HeaderMenu = ({
         return () => document.removeEventListener('mousedown', handler);
     }, []);
 
+    const handleThemeChange = (nextTheme: string) => {
+        onThemeChange(nextTheme);
+        setOpen(false); // close the "⋮" menu after selecting a theme
+    };
+
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <motion.button
@@ -874,7 +879,7 @@ const HeaderMenu = ({
                             }}
                         >
                             <div >
-                                <ThemeSelector currentTheme={currentTheme} onThemeChange={onThemeChange} styles={styles} />
+                                <ThemeSelector currentTheme={currentTheme} onThemeChange={handleThemeChange} styles={styles} />
                             </div>
                             <motion.button
                                 onClick={() => { onLogout(); setOpen(false); }}
