@@ -272,7 +272,7 @@ const getThemeStyles = (theme: string) => {
                 sparkleColor: 'rgba(255, 215, 0, 0.7)',
                 avatarBorder: 'rgba(220, 180, 100, 0.6)',
                 scrollbarThumb: 'rgba(200, 160, 80, 0.35)',
-                iconBtnBg: 'rgba(35, 25, 50, 0.7)',
+                iconBtnBg: 'rgba(35, 25, 50, 1)',
                 iconBtnBorder: 'rgba(180, 140, 80, 0.35)',
                 iconBtnColor: 'rgba(220, 180, 120, 0.75)',
                 flickerAnimation: false,
@@ -980,13 +980,13 @@ const ChatBubble = ({ msg, isMe, styles, isHorror, avatarSet }: {
                 <Avatar user={msg.sender} styles={styles} src={avatarSrc} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: isMe ? 'flex-end' : 'flex-start' }}>
-                    <span style={{
+                    {/* <span style={{
                         fontSize: 10, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
                         color: styles.textSecondary, marginBottom: 4,
                         paddingLeft: isMe ? 0 : 4, paddingRight: isMe ? 4 : 0,
                     }}>
                         {senderLabel}
-                    </span>
+                    </span> */}
 
                     <motion.div
                         whileHover={{ scale: 1.01 }}
@@ -1219,14 +1219,14 @@ export default function ChatPage() {
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <motion.div style={{ zIndex: 2, position: 'relative' }} whileHover={{ scale: 1.05 }}>
                                 <img src={avatarSet.header.chiku} alt="Chiku" style={{
-                                    width: 72, height: 72, borderRadius: '50%', objectFit: 'cover',
+                                    width: 60, height: 60, borderRadius: '50%', objectFit: 'cover',
                                     border: `3px solid ${styles.avatarBorder}`,
                                     boxShadow: `0 4px 18px ${styles.messageShadowOther}`,
                                 }} />
                             </motion.div>
                             <motion.div style={{ marginLeft: -12, zIndex: 1, position: 'relative' }} whileHover={{ scale: 1.05 }}>
                                 <img src={avatarSet.header.ashu} alt="Ashu" style={{
-                                    width: 72, height: 72, borderRadius: '50%', objectFit: 'cover',
+                                    width: 60, height: 60, borderRadius: '50%', objectFit: 'cover',
                                     border: `3px solid ${styles.avatarBorder}`,
                                     boxShadow: `0 4px 16px ${styles.messageShadowOther}`,
                                 }} />
