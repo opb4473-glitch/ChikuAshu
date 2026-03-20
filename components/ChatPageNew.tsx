@@ -556,68 +556,6 @@ const CoupleChatBackground = ({
                         height: auto;
                     }
                 }
-
-                /* ─── Animation: breathe (default/forest/light) ─── */
-                @keyframes couple-breathe {
-                    0%, 100% { transform: scale(1.00) translateY(0px);   opacity: ${coupleOpacity}; }
-                    50%       { transform: scale(1.04) translateY(-6px);  opacity: ${coupleOpacity * 0.75}; }
-                }
-                .couple-bg-anim-breathe .couple-chat-bg-img {
-                    animation: couple-breathe 9s ease-in-out infinite;
-                }
-
-                /* ─── Animation: flicker (horror) ─── */
-                @keyframes couple-flicker {
-                    0%,100% { opacity: ${coupleOpacity};       transform: scale(1.00); }
-                    20%     { opacity: ${coupleOpacity * 0.4}; transform: scale(1.005); }
-                    40%     { opacity: ${coupleOpacity * 0.9}; transform: scale(1.01); }
-                    60%     { opacity: ${coupleOpacity * 0.3}; transform: scale(0.999); }
-                    80%     { opacity: ${coupleOpacity * 0.8}; transform: scale(1.003); }
-                }
-                .couple-bg-anim-flicker .couple-chat-bg-img {
-                    animation: couple-flicker 4s ease-in-out infinite;
-                }
-
-                /* ─── Animation: shimmer (royal) ─── */
-                @keyframes couple-shimmer {
-                    0%,100% { opacity: ${coupleOpacity};       filter: ${coupleFilter} brightness(1.0); transform: scale(1.01); }
-                    50%     { opacity: ${coupleOpacity * 1.35}; filter: ${coupleFilter} brightness(1.25); transform: scale(1.04); }
-                }
-                .couple-bg-anim-shimmer .couple-chat-bg-img {
-                    animation: couple-shimmer 6s ease-in-out infinite;
-                }
-
-                /* ─── Animation: bounce (kids) ─── */
-                @keyframes couple-bounce {
-                    0%,100% { transform: scale(1.00) translateY(0px); }
-                    30%     { transform: scale(1.03) translateY(-10px); }
-                    60%     { transform: scale(0.98) translateY(4px); }
-                }
-                .couple-bg-anim-bounce .couple-chat-bg-img {
-                    animation: couple-bounce 5s cubic-bezier(0.34,1.56,0.64,1) infinite;
-                }
-
-                /* ─── Animation: scan (game/neon) ─── */
-                @keyframes couple-scan {
-                    0%     { transform: scale(1.00); filter: ${coupleFilter}; }
-                    25%    { transform: scale(1.02); filter: ${coupleFilter} hue-rotate(20deg) brightness(1.15); }
-                    50%    { transform: scale(1.01); filter: ${coupleFilter} hue-rotate(40deg) brightness(0.9); }
-                    75%    { transform: scale(1.03); filter: ${coupleFilter} hue-rotate(-20deg) brightness(1.2); }
-                    100%   { transform: scale(1.00); filter: ${coupleFilter}; }
-                }
-                .couple-bg-anim-scan .couple-chat-bg-img {
-                    animation: couple-scan 6s linear infinite;
-                }
-
-                /* ─── Animation: pulse (romantic) ─── */
-                @keyframes couple-pulse {
-                    0%,100% { opacity: ${coupleOpacity};        transform: scale(1.00); filter: ${coupleFilter}; }
-                    40%     { opacity: ${coupleOpacity * 1.4};  transform: scale(1.03); filter: ${coupleFilter} brightness(1.15) saturate(1.3); }
-                    80%     { opacity: ${coupleOpacity * 0.8};  transform: scale(0.99); filter: ${coupleFilter} brightness(0.9); }
-                }
-                .couple-bg-anim-pulse .couple-chat-bg-img {
-                    animation: couple-pulse 7s ease-in-out infinite;
-                }
             `}</style>
 
             <div className={`couple-chat-bg-wrap ${animClass}`}>
@@ -1212,11 +1150,6 @@ export default function ChatPage() {
                         pointer-events: none;
                         z-index: 0;
                     }
-
-                    @keyframes subtlePulse {
-                        0%, 100% { box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4); }
-                        50% { box-shadow: 0 3px 16px rgba(100, 0, 0, 0.3); }
-                    }
                 ` : ''}
 
                 /* Messages scroll area — relative so the bg image sits inside it */
@@ -1258,17 +1191,9 @@ export default function ChatPage() {
                 }
 
                 @keyframes spin {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
                 }
 
                 @keyframes horrorFlicker {
-                    0%, 100% { opacity: 1; }
-                    92% { opacity: 1; }
-                    93% { opacity: 0.7; }
-                    94% { opacity: 1; }
-                    96% { opacity: 0.85; }
-                    97% { opacity: 1; }
                 }
             `}</style>
 
