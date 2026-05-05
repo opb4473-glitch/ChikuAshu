@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Airplay, Baby, ChessQueen, Gamepad2, Ghost, MessageCircleHeart, Trees, Send, ImageIcon, RefreshCw, LogOut, Sparkles, Heart } from 'lucide-react';
+import { Airplay, Baby, ChessQueen, Gamepad2, Ghost, MessageCircleHeart, Trees, Send, ImageIcon, RefreshCw, LogOut, Sparkles, Heart, Bell } from 'lucide-react';
 
 // ─── Default avatars ─────────────────────────────────────────────────────────
 const HEADER_AVATAR_ASHU = '/boy.jpg';
@@ -974,7 +974,7 @@ const ThemeSelector = ({ currentTheme, onThemeChange, styles }: {
 
 // ─── Header Menu ──────────────────────────────────────────────────────────────��
 const HeaderMenu = ({
-    styles, refreshing, onRefresh, onLogout, currentTheme, onThemeChange,
+    styles, refreshing, onRefresh, onLogout, currentTheme, onThemeChange, onBellClick,
 }: {
     styles: ReturnType<typeof getThemeStyles>;
     refreshing: boolean;
@@ -982,6 +982,7 @@ const HeaderMenu = ({
     onLogout: () => void;
     currentTheme: string;
     onThemeChange: (theme: string) => void;
+    onBellClick?: () => void;
 }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
@@ -1001,6 +1002,24 @@ const HeaderMenu = ({
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+
+            <motion.button
+                className="icon-btn"
+                onClick={onBellClick}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Notifications"
+                style={{
+                    width: 36, height: 36, borderRadius: '50%',
+                    border: `1.5px solid ${styles.iconBtnBorder}`,
+                    background: styles.iconBtnBg, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: styles.iconBtnColor,
+                }}
+            >
+                <Bell size={14} />
+            </motion.button>
+
             <motion.button
                 className="icon-btn"
                 onClick={onRefresh}
@@ -1274,12 +1293,25 @@ export default function ChatPage() {
     const [pageLoading, setPageLoading] = useState(true);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [showLovePopup, setShowLovePopup] = useState(false);
+    const headerRef = useRef<HTMLElement | null>(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const { theme, resolvedTheme, setTheme } = useTheme();
 
     useEffect(() => { setMounted(true); }, []);
+
+    useEffect(() => {
+        const updateHeaderHeight = () => {
+            const next = headerRef.current?.getBoundingClientRect().height ?? 0;
+            setHeaderHeight(next);
+        };
+        updateHeaderHeight();
+        window.addEventListener('resize', updateHeaderHeight);
+        return () => window.removeEventListener('resize', updateHeaderHeight);
+    }, []);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -1391,6 +1423,7 @@ export default function ChatPage() {
                 .messages-scroll {
                     flex: 1;
                     overflow-y: auto;
+                    overflow-x: hidden;
                     padding: 1.1rem 1rem;
                     position: relative;
                     z-index: 1;
@@ -1438,6 +1471,7 @@ export default function ChatPage() {
 
                 {/* Header */}
                 <motion.header
+                    ref={headerRef as any}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5 }}
@@ -1527,8 +1561,94 @@ export default function ChatPage() {
                         styles={styles} refreshing={refreshing}
                         onRefresh={handleRefresh} onLogout={handleLogout}
                         currentTheme={currentTheme} onThemeChange={setTheme}
+                        onBellClick={() => setShowLovePopup(v => !v)}
                     />
                 </motion.header>
+
+                <AnimatePresence>
+                    {showLovePopup && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                            transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+                            style={{
+                                position: 'fixed',
+                                top: Math.max(0, headerHeight) + 10,
+                                width: 'min(720px, calc(100vw - 22px))',
+                                zIndex: 9999,
+                                marginLeft: '10px',
+                                pointerEvents: 'auto',
+                            }}
+                        >
+                            <div
+                                style={{
+                                    background: styles.headerBg,
+                                    backdropFilter: 'blur(22px)',
+                                    WebkitBackdropFilter: 'blur(22px)',
+                                    border: `1.5px solid ${styles.headerBorder}`,
+                                    boxShadow: styles.headerShadow,
+                                    borderRadius: 18,
+                                    padding: '12px 14px',
+                                }}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                                            <div
+                                                style={{
+                                                    width: 28,
+                                                    height: 28,
+                                                    borderRadius: '50%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    background: `${styles.accentColor}1a`,
+                                                    border: `1px solid ${styles.headerBorder}`,
+                                                    color: styles.textPrimary,
+                                                    fontWeight: 900,
+                                                }}
+                                            >
+                                                ♥
+                                            </div>
+                                            <div style={{ fontSize: 12, fontWeight: 900, letterSpacing: '0.06em', textTransform: 'uppercase', color: styles.textSecondary }}>
+                                                Aashu
+                                            </div>
+                                        </div>
+
+                                        <div style={{ fontSize: 14.5, fontWeight: 700, lineHeight: 1.55, color: styles.textPrimary }}>
+                                            {"Don’t regret last night, Chiku… I saw your message the moment you sent it, just couldn’t reply even though I wanted to.....🫂💗"}
+                                            <br />
+                                            {" I miss you quietly, holding onto us even in this silence… lots of love 🫂💗"}
+                                        </div>
+                                    </div>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.08 }}
+                                        whileTap={{ scale: 0.92 }}
+                                        onClick={() => setShowLovePopup(false)}
+                                        aria-label="Close popup"
+                                        style={{
+                                            width: 34,
+                                            height: 34,
+                                            borderRadius: '50%',
+                                            border: `1.5px solid ${styles.iconBtnBorder}`,
+                                            background: styles.iconBtnBg,
+                                            color: styles.iconBtnColor,
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            flexShrink: 0,
+                                        }}
+                                    >
+                                        ✕
+                                    </motion.button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Messages — contains the couple BG inside */}
                 <div className="messages-scroll">
@@ -1651,7 +1771,7 @@ export default function ChatPage() {
 
                         <input
                             type="text" className="msg-input"
-                            placeholder={isHorror ? `Summon ${otherUser}... 🩸` : `Write to ${otherUser}... 💌`}
+                            placeholder={isHorror ? `Summon ${otherUser}... 🩸` : `...`}
                             value={input} onChange={(e) => setInput(e.target.value)}
                             disabled={sending} autoComplete="off"
                         />
