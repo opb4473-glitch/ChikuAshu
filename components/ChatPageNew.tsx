@@ -1017,7 +1017,7 @@ const HeaderMenu = ({
                     color: styles.iconBtnColor,
                 }}
             >
-                <Bell size={14} />
+                <Bell size={14} className='text-pink-600' />
             </motion.button>
 
             <motion.button
@@ -1532,12 +1532,12 @@ export default function ChatPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             style={{
-                                padding: '8px 16px',
+                                padding: '4px 8px',
                                 background: 'linear-gradient(135deg, #ff1493, #ff69b4)',
                                 border: 'none',
                                 color: 'white',
                                 borderRadius: '20px',
-                                fontSize: '13px',
+                                fontSize: '8px',
                                 fontWeight: 700,
                                 cursor: 'pointer',
                                 display: 'flex',
