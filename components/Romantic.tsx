@@ -71,19 +71,16 @@ const RomanticPage = () => {
     const nextSlide = () => {
         setAutoPlay(false);
         setCurrentSlide((prev) => (prev + 1) % dailyRoutine.length);
-        setTimeout(() => setAutoPlay(true), 8000);
     };
 
     const prevSlide = () => {
         setAutoPlay(false);
         setCurrentSlide((prev) => (prev - 1 + dailyRoutine.length) % dailyRoutine.length);
-        setTimeout(() => setAutoPlay(true), 8000);
     };
 
     const goToSlide = (index: number) => {
         setAutoPlay(false);
         setCurrentSlide(index);
-        setTimeout(() => setAutoPlay(true), 8000);
     };
 
     return (
