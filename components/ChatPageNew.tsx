@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Airplay, Baby, ChessQueen, Gamepad2, Ghost, MessageCircleHeart, Trees, Send, ImageIcon, RefreshCw, LogOut, Sparkles } from 'lucide-react';
+import { Airplay, Baby, ChessQueen, Gamepad2, Ghost, MessageCircleHeart, Trees, Send, ImageIcon, RefreshCw, LogOut, Sparkles, Heart } from 'lucide-react';
 
 // ─── Default avatars ─────────────────────────────────────────────────────────
 const HEADER_AVATAR_ASHU = '/boy.jpg';
@@ -48,6 +48,19 @@ const HEADER_AVATAR_CHIKU_ROMANTIC = '/romantic-header-chiku.jpg';
 const CHAT_AVATAR_ASHU_ROMANTIC = '/romantic-chat-ashu.jpg';
 const CHAT_AVATAR_CHIKU_ROMANTIC = '/romantic-chat-chiku.jpg';
 
+// ─── Romantic Background Carousel (Images & Videos) ──────────────────────────
+// Add your romantic images and videos here
+// Supported formats: .jpg, .png, .webp, .mp4, .webm, .mov
+// These will loop through with smooth transitions
+const ROMANTIC_BG_MEDIA = [
+    { src: '/romantic-bg-1.jpg', type: 'image', duration: 6 },
+    { src: '/romantic-bg-2.mp4', type: 'video', duration: 8 },
+    { src: '/romantic-bg-3.jpg', type: 'image', duration: 6 },
+    { src: '/romantic-bg-4.webm', type: 'video', duration: 7 },
+    { src: '/romantic-bg-5.jpg', type: 'image', duration: 6 },
+    // Add more media files as needed
+];
+
 // ─── Light ───────────────────────────────────────────────────────────────────
 const HEADER_AVATAR_ASHU_LIGHT = '/light-header-ashu.jpg';
 const HEADER_AVATAR_CHIKU_LIGHT = '/light-header-chiku.jpg';
@@ -81,11 +94,11 @@ const getChatAvatarSet = (theme: ThemeId) => {
                 header: { ashu: HEADER_AVATAR_ASHU_GAME, chiku: HEADER_AVATAR_CHIKU_GAME },
                 chat: { ashu: CHAT_AVATAR_ASHU_GAME, chiku: CHAT_AVATAR_CHIKU_GAME },
             };
-        case 'romantic':
-            return {
-                header: { ashu: HEADER_AVATAR_ASHU_ROMANTIC, chiku: HEADER_AVATAR_CHIKU_ROMANTIC },
-                chat: { ashu: CHAT_AVATAR_ASHU_ROMANTIC, chiku: CHAT_AVATAR_CHIKU_ROMANTIC },
-            };
+        // case 'romantic':
+        //     return {
+        //         header: { ashu: HEADER_AVATAR_ASHU_ROMANTIC, chiku: HEADER_AVATAR_CHIKU_ROMANTIC },
+        //         chat: { ashu: CHAT_AVATAR_ASHU_ROMANTIC, chiku: CHAT_AVATAR_CHIKU_ROMANTIC },
+        //     };
         case 'light':
             return {
                 header: { ashu: HEADER_AVATAR_ASHU_LIGHT, chiku: HEADER_AVATAR_CHIKU_LIGHT },
@@ -144,7 +157,7 @@ const THEMES = [
     { id: 'royal', name: 'Royal', description: 'Premium gold', accent: '#daa520' },
     { id: 'kids', name: 'Kids', description: 'Bright & playful', accent: '#ff6b9d' },
     { id: 'game', name: 'Game', description: 'Neon cyber', accent: '#00ffcc' },
-    { id: 'romantic', name: 'Romantic', description: 'Soft & sweet', accent: '#ff6b9d' },
+    // { id: 'romantic', name: 'Romantic', description: 'Soft & sweet', accent: '#ff6b9d' },
 ];
 
 // Theme icon — geometric, no emoji (same approach as login page)
@@ -354,41 +367,42 @@ const getThemeStyles = (theme: string) => {
                 coupleMaskStrength: 'aggressive',
                 bgAnimationType: 'scan',
             };
-        case 'romantic':
+            // case 'romantic':
             return {
-                background: 'linear-gradient(160deg, #2a1520 0%, #301828 45%, #251520 100%)',
-                headerBg: 'rgba(35, 18, 28, 0.92)',
-                headerBorder: 'rgba(255, 150, 180, 0.3)',
-                headerShadow: '0 2px 24px rgba(255, 100, 150, 0.25)',
-                titleGradient: 'linear-gradient(135deg, #ff8fa3 0%, #ff6b9d 45%, #ffb3c6 100%)',
-                messageBgMe: 'linear-gradient(135deg, #e05080 0%, #ff6b9d 55%, #d04070 100%)',
-                messageBgOther: 'rgba(38, 20, 30, 0.92)',
-                messageBorder: 'rgba(255, 140, 170, 0.35)',
-                messageShadowMe: 'rgba(255, 100, 150, 0.5)',
-                messageShadowOther: 'rgba(0, 0, 0, 0.3)',
-                inputBg: 'rgba(40, 22, 32, 0.8)',
-                inputBorder: 'rgba(255, 140, 170, 0.4)',
-                footerBg: 'linear-gradient(to top, rgba(30, 15, 22, 0.98), rgba(35, 18, 28, 0.8))',
-                footerBorder: 'rgba(255, 140, 170, 0.25)',
-                sendBtnGradient: 'linear-gradient(135deg, #e05080, #ff6b9d)',
-                sendBtnShadow: 'rgba(255, 100, 150, 0.5)',
-                textPrimary: 'rgba(255, 230, 240, 0.95)',
-                textSecondary: 'rgba(255, 180, 200, 0.7)',
-                textMuted: 'rgba(230, 160, 180, 0.5)',
-                accentColor: '#ff6b9d',
-                blobColors: ['rgba(255, 150, 180, 0.18)', 'rgba(255, 100, 150, 0.12)', 'rgba(255, 180, 200, 0.1)'],
-                sparkleColor: 'rgba(255, 180, 200, 0.7)',
-                avatarBorder: 'rgba(255, 150, 180, 0.55)',
-                scrollbarThumb: 'rgba(255, 150, 180, 0.35)',
-                iconBtnBg: 'rgba(45, 22, 35)',
-                iconBtnBorder: 'rgba(255, 140, 170, 0.35)',
-                iconBtnColor: 'rgba(255, 180, 200, 0.75)',
+                background: 'linear-gradient(160deg, #1a0f18 0%, #2d1528 35%, #3d1a2f 70%, #1f0e1a 100%)',
+                headerBg: 'rgba(25, 12, 22, 0.94)',
+                headerBorder: 'rgba(255, 105, 180, 0.45)',
+                headerShadow: '0 4px 32px rgba(255, 69, 150, 0.35), 0 0 60px rgba(200, 50, 120, 0.15)',
+                titleGradient: 'linear-gradient(135deg, #ff69b4 0%, #ff1493 35%, #ff69b4 100%)',
+                messageBgMe: 'linear-gradient(135deg, #d81b60 0%, #ff1493 50%, #c2185b 100%)',
+                messageBgOther: 'rgba(35, 15, 28, 0.95)',
+                messageBorder: 'rgba(255, 105, 180, 0.5)',
+                messageShadowMe: 'rgba(255, 20, 147, 0.65)',
+                messageShadowOther: 'rgba(0, 0, 0, 0.4)',
+                inputBg: 'rgba(35, 18, 30, 0.85)',
+                inputBorder: 'rgba(255, 105, 180, 0.55)',
+                footerBg: 'linear-gradient(to top, rgba(18, 8, 15, 0.98), rgba(30, 14, 25, 0.85))',
+                footerBorder: 'rgba(255, 105, 180, 0.35)',
+                sendBtnGradient: 'linear-gradient(135deg, #ff1493, #ff69b4)',
+                sendBtnShadow: 'rgba(255, 20, 147, 0.7)',
+                textPrimary: 'rgba(255, 240, 245, 0.98)',
+                textSecondary: 'rgba(255, 200, 220, 0.8)',
+                textMuted: 'rgba(255, 170, 200, 0.6)',
+                accentColor: '#ff1493',
+                blobColors: ['rgba(255, 105, 180, 0.25)', 'rgba(255, 20, 147, 0.18)', 'rgba(255, 182, 193, 0.15)'],
+                sparkleColor: 'rgba(255, 105, 180, 0.85)',
+                avatarBorder: 'rgba(255, 105, 180, 0.7)',
+                scrollbarThumb: 'rgba(255, 105, 180, 0.5)',
+                iconBtnBg: 'rgba(50, 20, 40)',
+                iconBtnBorder: 'rgba(255, 105, 180, 0.5)',
+                iconBtnColor: 'rgba(255, 182, 193, 0.9)',
                 flickerAnimation: false,
                 pulseGlow: true,
-                coupleOpacity: 0.18,
-                coupleFilter: 'grayscale(10%) sepia(20%) saturate(1.3) hue-rotate(330deg)',
-                coupleMaskStrength: 'medium',
-                bgAnimationType: 'pulse',
+                coupleOpacity: 0.22,
+                coupleFilter: 'grayscale(0%) sepia(25%) saturate(1.4) hue-rotate(310deg) brightness(1.05)',
+                coupleMaskStrength: 'soft',
+                bgAnimationType: 'glow',
+                useCarousel: true,
             };
         case 'light':
             return {
@@ -570,7 +584,228 @@ const CoupleChatBackground = ({
     );
 };
 
-// ─── Theme Selector ────────────────────────────────────────────────────────────
+// ─── Romantic Carousel Background Component ──────────────────────────────────
+// Stunning animated carousel with rotating images and videos for romantic theme
+// Features smooth crossfade transitions, floating hearts, and glowing effects
+const RomanticCarouselBackground = ({
+    styles,
+}: {
+    styles: ReturnType<typeof getThemeStyles>;
+}) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [nextIndex, setNextIndex] = useState(1);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    // Auto-rotate media
+    useEffect(() => {
+        if (!ROMANTIC_BG_MEDIA.length) return;
+
+        const mediaDuration = ROMANTIC_BG_MEDIA[currentIndex].duration * 1000;
+        const timer = setTimeout(() => {
+            setCurrentIndex((prev) => (prev + 1) % ROMANTIC_BG_MEDIA.length);
+            setNextIndex((prev) => (prev + 1) % ROMANTIC_BG_MEDIA.length);
+        }, mediaDuration);
+
+        return () => clearTimeout(timer);
+    }, [currentIndex]);
+
+    const currentMedia = ROMANTIC_BG_MEDIA[currentIndex];
+    const isVideo = currentMedia.type === 'video';
+
+    // Generate floating hearts
+    const hearts = Array.from({ length: 8 }).map((_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        delay: Math.random() * 2,
+        duration: 8 + Math.random() * 4,
+    }));
+
+    return (
+        <>
+            <style>{`
+                /* Romantic carousel wrapper */
+                .romantic-carousel-wrap {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 0;
+                    pointer-events: none;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    top: 100px;
+                }
+
+                .romantic-carousel-container {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .romantic-media-item {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    opacity: 0;
+                    animation: carouselFade 1.2s ease-in-out forwards;
+                }
+
+                .romantic-media-item.active {
+                    animation: carouselFade 1.2s ease-in-out forwards;
+                    z-index: 1;
+                }
+
+                @keyframes carouselFade {
+                    0% {
+                        opacity: 0;
+                        filter: brightness(0.8) blur(8px);
+                    }
+                    50% {
+                        filter: brightness(1);
+                    }
+                    100% {
+                        opacity: 0.28;
+                        filter: brightness(1);
+                    }
+                }
+
+                /* Floating hearts animation */
+                .floating-heart {
+                    position: absolute;
+                    font-size: 24px;
+                    opacity: 0.4;
+                    animation: floatUp linear infinite;
+                    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.6));
+                    pointer-events: none;
+                }
+
+                @keyframes floatUp {
+                    0% {
+                        transform: translateY(100vh) rotate(0deg);
+                        opacity: 0;
+                    }
+                    5% {
+                        opacity: 0.5;
+                    }
+                    95% {
+                        opacity: 0.3;
+                    }
+                    100% {
+                        transform: translateY(-100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+
+                /* Glowing overlay effect */
+                .romantic-glow-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: radial-gradient(ellipse at center, transparent 0%, rgba(255, 20, 147, 0.1) 50%, rgba(138, 43, 226, 0.15) 100%);
+                    pointer-events: none;
+                    animation: glowPulse 4s ease-in-out infinite;
+                }
+
+                @keyframes glowPulse {
+                    0%, 100% {
+                        opacity: 0.3;
+                    }
+                    50% {
+                        opacity: 0.6;
+                    }
+                }
+
+                /* Particle effect */
+                .particle {
+                    position: absolute;
+                    border-radius: 50%;
+                    animation: particle-float linear infinite;
+                    pointer-events: none;
+                }
+
+                @keyframes particle-float {
+                    0% {
+                        transform: translate(0, 0) scale(1);
+                        opacity: 0.8;
+                    }
+                    100% {
+                        transform: translate(var(--tx), var(--ty)) scale(0);
+                        opacity: 0;
+                    }
+                }
+
+                /* Video styling */
+                .romantic-media-item[data-type="video"] {
+                    object-fit: cover;
+                }
+
+                /* Mobile responsiveness */
+                @media (max-width: 767px) {
+                    .romantic-media-item {
+                        object-fit: cover;
+                    }
+                }
+
+                @media (min-width: 768px) {
+                    .romantic-media-item {
+                        object-fit: contain;
+                    }
+                }
+            `}</style>
+
+            <div className="romantic-carousel-wrap">
+                <div className="romantic-carousel-container">
+                    {/* Current media */}
+                    {isVideo ? (
+                        <video
+                            key={`video-${currentIndex}`}
+                            className="romantic-media-item active"
+                            data-type="video"
+                            src={currentMedia.src}
+                            autoPlay
+                            muted
+                            loop
+                            crossOrigin="anonymous"
+                        />
+                    ) : (
+                        <img
+                            key={`img-${currentIndex}`}
+                            className="romantic-media-item active"
+                            src={currentMedia.src}
+                            alt=""
+                            aria-hidden="true"
+                            crossOrigin="anonymous"
+                        />
+                    )}
+
+                    {/* Glowing overlay */}
+                    <div className="romantic-glow-overlay" />
+
+                    {/* Floating hearts */}
+                    {hearts.map((heart) => (
+                        <div
+                            key={heart.id}
+                            className="floating-heart"
+                            style={{
+                                left: `${heart.left}%`,
+                                animationDuration: `${heart.duration}s`,
+                                animationDelay: `${heart.delay}s`,
+                            }}
+                        >
+                            ♥
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
+    );
+};
+
+// ─── Theme Selector ────────────────────────────────��───────────────────────────
 const ThemeSelector = ({ currentTheme, onThemeChange, styles }: {
     currentTheme: string;
     onThemeChange: (theme: string) => void;
@@ -673,7 +908,7 @@ const ThemeSelector = ({ currentTheme, onThemeChange, styles }: {
 
                         {THEMES.map((t, index) => {
                             const isActive = currentTheme === t.id;
-                            const isDisabled = t.id === 'romantic';
+                            const isDisabled = false;
 
                             return (
                                 <motion.button
@@ -711,7 +946,7 @@ const ThemeSelector = ({ currentTheme, onThemeChange, styles }: {
                                             fontWeight: 500,
                                             marginTop: 1,
                                         }}>
-                                            {isDisabled ? 'Coming soon' : t.description}
+                                            {t.description}
                                         </div>
                                     </div>
 
@@ -737,7 +972,7 @@ const ThemeSelector = ({ currentTheme, onThemeChange, styles }: {
     );
 };
 
-// ─── Header Menu ───────────────────────────────────────────────────────────────
+// ─── Header Menu ──────────────────────────────────────────────────────────────��
 const HeaderMenu = ({
     styles, refreshing, onRefresh, onLogout, currentTheme, onThemeChange,
 }: {
@@ -1232,7 +1467,7 @@ export default function ChatPage() {
                                 }} />
                             </motion.div>
                         </div>
-                        <div>
+                        {/* <div>
                             <motion.div
                                 key={currentTheme}
                                 initial={{ opacity: 0, y: -5 }}
@@ -1254,9 +1489,40 @@ export default function ChatPage() {
                                     {currentUser === 'ashu' ? 'Ashu' : 'Chiku'}
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <motion.button
+                            onClick={() => router.push('/for-you')}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{
+                                padding: '8px 16px',
+                                background: 'linear-gradient(135deg, #ff1493, #ff69b4)',
+                                border: 'none',
+                                color: 'white',
+                                borderRadius: '20px',
+                                fontSize: '13px',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 6,
+                                boxShadow: `0 4px 15px rgba(255, 20, 147, 0.4)`,
+                                transition: 'all 0.3s ease',
+                            }}
+                            onHoverStart={(e: any) => {
+                                e.currentTarget.style.boxShadow = `0 8px 25px rgba(255, 20, 147, 0.6)`;
+                            }}
+                            onHoverEnd={(e: any) => {
+                                e.currentTarget.style.boxShadow = `0 4px 15px rgba(255, 20, 147, 0.4)`;
+                            }}
+                        >
+                            <Heart size={14} fill="currentColor" />
+                            For You
+                        </motion.button>
+                    </div>
                     <HeaderMenu
                         styles={styles} refreshing={refreshing}
                         onRefresh={handleRefresh} onLogout={handleLogout}
@@ -1266,8 +1532,12 @@ export default function ChatPage() {
 
                 {/* Messages — contains the couple BG inside */}
                 <div className="messages-scroll">
-                    {/* ── Couple Background Image ── */}
-                    <CoupleChatBackground key={currentTheme} theme={currentTheme as ThemeId} styles={styles} />
+                    {/* ── Couple Background Image / Romantic Carousel ── */}
+                    {currentTheme === 'romantic' ? (
+                        <RomanticCarouselBackground key={currentTheme} styles={styles} />
+                    ) : (
+                        <CoupleChatBackground key={currentTheme} theme={currentTheme as ThemeId} styles={styles} />
+                    )}
 
                     {/* ── Messages content sits above the BG ── */}
                     <div className="messages-content">
