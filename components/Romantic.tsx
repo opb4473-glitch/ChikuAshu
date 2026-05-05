@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const RomanticPage = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [autoPlay, setAutoPlay] = useState(true);
+    const [autoPlay, setAutoPlay] = useState(false);
     const [hearts, setHearts] = useState<{ left: number; x: number; duration: number; delay: number }[]>([]);
     const [mounted, setMounted] = useState(false);
 
