@@ -363,11 +363,13 @@ const RomanticPage = () => {
                         <div className="text-pink-300 text-2xl mb-5">🌅</div>
 
                         <h3 className="text-2xl sm:text-3xl font-light text-pink-200 mb-6">
-                            Sirf Aapko Manane Ke Liye
+                            Meri Chiku ko manane ke liye...😊
                         </h3>
 
                         <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
-                            Mai jaldi uth gaya… sirf apni Chiku ko manana tha na… 😌
+                            Mai subah jaldi uth gaya… Baju me dekha to meri cute baby abhi so rahi hai, Me pyaar se unko blanket odhaya aur aawaz kiye bina room se bahar chala gaya 
+                            <br />
+                            muje aaj sirf apni Chiku ko manana hai… 👉 👈
                             <br /><br />
                             Subah subah thodi thandi hawa chal rahi thi…
                             aur mai seedha gaya aapke liye ek chota sa sunflower lene 🌻🤏
@@ -403,7 +405,7 @@ const RomanticPage = () => {
                             Toh pehle uska face dono haathon se pakadta…
                             forehead pe ek pyaari si kiss deta 😚🤍
                             <br /><br />
-                            Aur bolta —
+                            Aur bolta...
                             <br />
                             <span className="italic text-pink-200">
                                 “Pagal bachha… itna guilty feel nahi karte… mai kahi nahi ja raha…”
@@ -411,9 +413,19 @@ const RomanticPage = () => {
                         </p>
                     </div>
 
-                    <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px]">
+                    <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px] flex flex-col">
                         <img
                             src="/daily/forehead.gif"
+                            alt="forehead kiss"
+                            className="w-full h-full object-cover"
+                        />
+                        <img
+                            src="/daily/forehead-1.gif"
+                            alt="forehead kiss"
+                            className="w-full h-full object-cover"
+                        />
+                        <img
+                            src="/daily/forehead-2.gif"
                             alt="forehead kiss"
                             className="w-full h-full object-cover"
                         />
@@ -434,14 +446,15 @@ const RomanticPage = () => {
 
                     <div className="relative h-[320px] sm:h-[400px]">
                         <img
-                            src="/daily/hug.png"
+                            src="/daily/side-walk.png"
                             alt="hug"
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f18] via-transparent to-transparent" />
                     </div>
 
-                    <div className="p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+                    <div className="p-8 sm:p-10 md:
+                        p-14 flex flex-col justify-center">
                         <div className="text-pink-300 text-2xl mb-5">🫂</div>
 
                         <h3 className="text-2xl sm:text-3xl font-light text-pink-200 mb-6">
@@ -452,10 +465,10 @@ const RomanticPage = () => {
                             Fir aapko apni hoodie pehna deta kyuki subah thodi thand thi 😭
                             <br /><br />
                             Aur aapko side hug karke walk pe le jaata…
-                            while listening to your nonstop cute bakbak 😤🤍
+                            while listening to your nonstop cute bakbak...🤍
                             <br /><br />
                             Aur jab bhi aap “sorry” bolte…
-                            mai bas aapke lips pe finger rakh ke bolta —
+                            mai bas aapke lips pe finger rakh ke bolta...
                             <br /><br />
                             <span className="italic text-pink-200">
                                 “Bas… meri Chiku ko itna udaas rehna allowed nahi hai…” 🌸
@@ -479,7 +492,7 @@ const RomanticPage = () => {
                     <div className="text-5xl">✨</div>
 
                     <h3 className="text-3xl sm:text-4xl md:text-5xl font-light text-gradient">
-                        Aap Special Ho
+                        Aap Special Ho My Baby...
                     </h3>
 
                     <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
@@ -497,6 +510,9 @@ const RomanticPage = () => {
 
                         <p className="text-pink-200 text-lg sm:text-xl italic">
                             “Meri comfort ho…”
+                        </p>
+                        <p className="text-pink-200 text-lg sm:text-xl italic">
+                            “Aap Special ho...”
                         </p>
 
         
