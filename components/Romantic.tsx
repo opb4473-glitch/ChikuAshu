@@ -306,6 +306,207 @@ const RomanticPage = () => {
                 </div>
             </section>
 
+            {/* ── Morning Love Section ── */}
+<section className="relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 overflow-hidden">
+    
+    {/* Background Blur Orbs */}
+    <div className="absolute top-20 left-10 w-72 h-72 bg-pink-500/10 blur-3xl rounded-full" />
+    <div className="absolute bottom-10 right-10 w-72 h-72 bg-rose-400/10 blur-3xl rounded-full" />
+
+    <div className="relative max-w-5xl mx-auto">
+
+        <div className="text-center mb-14 sm:mb-20">
+            <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+            >
+                <div className="text-5xl sm:text-6xl md:text-7xl">
+                    🌻
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gradient leading-tight">
+                    Aur pata hai aaj kya hua?
+                </h2>
+
+                <p className="text-pink-200/70 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">
+                    Aaj subah meri duniya thodi aur khoobsurat lag rahi thi...
+                    Kyuki meri saari soch sirf meri Chiku ke around ghoom rahi thi 🤍
+                </p>
+            </motion.div>
+        </div>
+
+        <div className="space-y-10">
+
+            {/* Card 1 */}
+            <motion.div
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="backdrop-blur-xl bg-white/[0.03] border border-pink-400/10 rounded-[2rem] overflow-hidden"
+            >
+                <div className="grid md:grid-cols-2 gap-0">
+
+                    <div className="relative h-[320px] sm:h-[400px]">
+                        <img
+                            src="/daily/sunflower.jpg"
+                            alt="sunflower"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f18] via-transparent to-transparent" />
+                    </div>
+
+                    <div className="p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+                        <div className="text-pink-300 text-2xl mb-5">🌅</div>
+
+                        <h3 className="text-2xl sm:text-3xl font-light text-pink-200 mb-6">
+                            Sirf Aapko Manane Ke Liye
+                        </h3>
+
+                        <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
+                            Mai jaldi uth gaya… sirf apni Chiku ko manana tha na… 😌
+                            <br /><br />
+                            Subah subah thodi thandi hawa chal rahi thi…
+                            aur mai seedha gaya aapke liye ek chota sa sunflower lene 🌻🤏
+                            <br /><br />
+                            Kyuki mujhe pata hai meri bachhi ko bright bright cheeze pasand hai…
+                            bilkul uski smile ki tarah ✨
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="backdrop-blur-xl bg-white/[0.03] border border-pink-400/10 rounded-[2rem] overflow-hidden"
+            >
+                <div className="grid md:grid-cols-2 gap-0">
+
+                    <div className="order-2 md:order-1 p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+                        <div className="text-pink-300 text-2xl mb-5">🤍</div>
+
+                        <h3 className="text-2xl sm:text-3xl font-light text-pink-200 mb-6">
+                            Forehead Kiss & Warm Hugs
+                        </h3>
+
+                        <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
+                            Fir socha…
+                            Agar meri Chiku mere saamne hoti na… 🥺
+                            <br /><br />
+                            Toh pehle uska face dono haathon se pakadta…
+                            forehead pe ek pyaari si kiss deta 😚🤍
+                            <br /><br />
+                            Aur bolta —
+                            <br />
+                            <span className="italic text-pink-200">
+                                “Pagal bachha… itna guilty feel nahi karte… mai kahi nahi ja raha…”
+                            </span>
+                        </p>
+                    </div>
+
+                    <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px]">
+                        <img
+                            src="/daily/forehead.gif"
+                            alt="forehead kiss"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f18] via-transparent to-transparent" />
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="backdrop-blur-xl bg-white/[0.03] border border-pink-400/10 rounded-[2rem] overflow-hidden"
+            >
+                <div className="grid md:grid-cols-2 gap-0">
+
+                    <div className="relative h-[320px] sm:h-[400px]">
+                        <img
+                            src="/daily/hug.png"
+                            alt="hug"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f18] via-transparent to-transparent" />
+                    </div>
+
+                    <div className="p-8 sm:p-10 md:p-14 flex flex-col justify-center">
+                        <div className="text-pink-300 text-2xl mb-5">🫂</div>
+
+                        <h3 className="text-2xl sm:text-3xl font-light text-pink-200 mb-6">
+                            Bas Tum Aur Main
+                        </h3>
+
+                        <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
+                            Fir aapko apni hoodie pehna deta kyuki subah thodi thand thi 😭
+                            <br /><br />
+                            Aur aapko side hug karke walk pe le jaata…
+                            while listening to your nonstop cute bakbak 😤🤍
+                            <br /><br />
+                            Aur jab bhi aap “sorry” bolte…
+                            mai bas aapke lips pe finger rakh ke bolta —
+                            <br /><br />
+                            <span className="italic text-pink-200">
+                                “Bas… meri Chiku ko itna udaas rehna allowed nahi hai…” 🌸
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Final Emotional Section */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="relative text-center py-16 sm:py-20 px-6 rounded-[2.5rem] overflow-hidden border border-pink-500/10 bg-gradient-to-br from-pink-500/[0.08] to-transparent"
+            >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,105,180,0.12),transparent_70%)]" />
+
+                <div className="relative space-y-6 max-w-3xl mx-auto">
+                    <div className="text-5xl">✨</div>
+
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-light text-gradient">
+                        Aap Special Ho
+                    </h3>
+
+                    <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
+                        Ek late night…
+                        Ek missed moment…
+                        Ya ek choti si misunderstanding…
+                        <br /><br />
+                        Ye sab milke bhi meri feelings ko kabhi kam nahi kar sakta 🌻
+                    </p>
+
+                    <div className="space-y-2 pt-4">
+                        <p className="text-pink-200 text-lg sm:text-xl italic">
+                            “Aap meri ho…”
+                        </p>
+
+                        <p className="text-pink-200 text-lg sm:text-xl italic">
+                            “Meri comfort ho…”
+                        </p>
+
+        
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    </div>
+</section>
+
             {/* Footer */}
             <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
                 <div className="max-w-2xl mx-auto text-center space-y-4 sm:space-y-6">
