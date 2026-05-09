@@ -413,7 +413,7 @@ const RomanticPage = () => {
                         </p>
                     </div>
 
-                    <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px] flex flex-col">
+                    <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px] flex flex-col gap-2">
                         <img
                             src="/daily/forehead.gif"
                             alt="forehead kiss"
@@ -444,9 +444,14 @@ const RomanticPage = () => {
             >
                 <div className="grid md:grid-cols-2 gap-0">
 
-                    <div className="relative h-[320px] sm:h-[400px]">
+                    <div className="relative h-[320px] sm:h-[400px] flex flex-col gap-2">
+                        <img 
+                            src="/daily/side-walk.jpg"
+                            alt="hug"
+                            className="w-full h-full object-cover"
+                        />
                         <img
-                            src="/daily/side-walk.png"
+                            src="/daily/side-walk.jpg"
                             alt="hug"
                             className="w-full h-full object-cover"
                         />
