@@ -1003,22 +1003,6 @@ const HeaderMenu = ({
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
 
-            <motion.button
-                className="icon-btn"
-                onClick={onBellClick}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Notifications"
-                style={{
-                    width: 36, height: 36, borderRadius: '50%',
-                    border: `1.5px solid ${styles.iconBtnBorder}`,
-                    background: styles.iconBtnBg, cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: styles.iconBtnColor,
-                }}
-            >
-                <Bell size={14} className='text-pink-600' />
-            </motion.button>
 
             <motion.button
                 className="icon-btn"
@@ -1532,12 +1516,12 @@ export default function ChatPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             style={{
-                                padding: '4px 8px',
+                                padding: '6px 12px',
                                 background: 'linear-gradient(135deg, #ff1493, #ff69b4)',
                                 border: 'none',
                                 color: 'white',
                                 borderRadius: '20px',
-                                fontSize: '8px',
+                                fontSize: '13px',
                                 fontWeight: 700,
                                 cursor: 'pointer',
                                 display: 'flex',
