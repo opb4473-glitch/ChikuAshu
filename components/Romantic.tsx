@@ -419,7 +419,7 @@ aur jese hi meri raajkumari ki aakh khuli
 
                     <div className="order-1 md:order-2 relative h-[320px] sm:h-[400px] flex flex-col gap-2">
                         <img
-                            src="/daily/forehead-2.gif"
+                            src="/daily/d825cbf297883fcfd05cbd4bba04f4cf.jpg"
                             alt="forehead kiss"
                             className="w-full h-full object-cover"
                         />
