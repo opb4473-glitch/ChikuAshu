@@ -399,13 +399,17 @@ const RomanticPage = () => {
                         </h3>
 
                         <p className="text-pink-100/70 leading-relaxed text-sm sm:text-base md:text-lg font-light">
-                            Fir socha…
-                            Agar meri Chiku mere saamne hoti na… 🥺
+                            Fir me room me aaya tab dekha meri cutiepie abhi tak so rahi hai...
+
                             <br /><br />
-                            Toh pehle uska face dono haathon se pakadta…
-                            forehead pe ek pyaari si kiss deta 😚🤍
+                            Me aawaz kiye bina bed ke pass aaya aur bed ke niche meri princess ke samne beith gaya aur unki aakhe khulne ka intezar karne laga tab tak pyaar se bass meri princu ko hi niharne laga
                             <br /><br />
-                            Aur bolta...
+aur jese hi meri raajkumari ki aakh khuli
+                            <br /><br />
+                            Toh pehle unka face dono haathon se pakada… aur ek soft hug ke sath
+                            forehead pe ek pyaari si kiss ki 😚🤍🤗
+                            <br /><br />
+                            Aur bola...
                             <br />
                             <span className="italic text-pink-200">
                                 “Pagal bachha… itna guilty feel nahi karte… mai kahi nahi ja raha…”
