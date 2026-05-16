@@ -1512,7 +1512,7 @@ export default function ChatPage() {
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <motion.button
-                            onClick={() => router.push('/for-you')}
+                            onClick={() => router.push('/good-morning')}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             style={{
@@ -1538,7 +1538,7 @@ export default function ChatPage() {
                             }}
                         >
                             <Heart size={14} fill="currentColor" />
-                            For You
+                            Open It
                         </motion.button>
                     </div>
                     <HeaderMenu
