@@ -333,7 +333,7 @@ const GoodMorningPage = () => {
                         <ChevronLeft size={20} />
                         <span>Back</span>
                     </button>
-                    <span className="text-lg sm:text-xl md:text-2xl font-light tracking-widest text-gradient">
+                    <span className="text-md sm:text-md md:text-2xl font-light tracking-widest text-gradient">
                         Good Morning Chiku ❤️
                     </span>
                     <div className="w-12" />
